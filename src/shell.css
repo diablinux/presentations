@@ -1,0 +1,383 @@
+html, body { height: 100%; }
+  body {
+    font-family: var(--theme-font-sans);
+    overflow: hidden;
+    background: var(--theme-background);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* ── Animated background ───────────────────────────── */
+  #bg {
+    position: fixed; inset: 0; z-index: -1;
+    background:
+      radial-gradient(1100px 620px at 12% -12%, color-mix(in srgb, var(--theme-accent) 22%, transparent), transparent 62%),
+      radial-gradient(900px 560px at 102% 108%, color-mix(in srgb, var(--theme-highlight) 13%, transparent), transparent 62%),
+      radial-gradient(700px 500px at 60% 50%, color-mix(in srgb, var(--theme-accent-soft) 7%, transparent), transparent 70%),
+      var(--theme-background);
+  }
+  #bg::after {
+    content: '';
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgb(var(--theme-neutral-rgb) / 3.5%) 1px, transparent 1px),
+      linear-gradient(90deg, rgb(var(--theme-neutral-rgb) / 3.5%) 1px, transparent 1px);
+    background-size: 58px 58px;
+    -webkit-mask-image: radial-gradient(circle at 50% 38%, var(--theme-black) 0%, transparent 82%);
+            mask-image: radial-gradient(circle at 50% 38%, var(--theme-black) 0%, transparent 82%);
+  }
+
+  /* ── Slide shell ───────────────────────────────────── */
+  .slide {
+    position: absolute; inset: 0;
+    overflow-y: auto; overflow-x: hidden;
+    opacity: 0; visibility: hidden;
+    transform: translateY(18px) scale(.988);
+    transition: opacity .5s ease, transform .55s cubic-bezier(.22,.8,.25,1), visibility .5s;
+    will-change: opacity, transform;
+  }
+  .slide.active { opacity: 1; visibility: visible; transform: none; }
+
+  .slide-inner {
+    min-height: 100%;
+    display: flex; flex-direction: column; justify-content: center;
+    width: 100%; max-width: 76rem;
+    margin: 0 auto;
+    padding: 5.5rem 1.5rem 5.5rem;
+  }
+  @media (min-width: 768px) {
+    .slide-inner { padding: 6rem 3rem 6rem; }
+  }
+
+  .slide::-webkit-scrollbar { width: 9px; }
+  .slide::-webkit-scrollbar-track { background: transparent; }
+  .slide::-webkit-scrollbar-thumb {
+    background: rgb(var(--theme-neutral-rgb) / 13%); border-radius: 9999px;
+    border: 3px solid transparent; background-clip: content-box;
+  }
+  .slide::-webkit-scrollbar-thumb:hover { background: rgb(var(--theme-neutral-rgb) / 25%); background-clip: content-box; }
+
+  /* ── Entrance animation ────────────────────────────── */
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: none; }
+  }
+  .slide.active .rise { animation: rise .62s cubic-bezier(.22,.8,.25,1) both; }
+  .slide.active .rise:nth-child(1) { animation-delay: .05s; }
+  .slide.active .rise:nth-child(2) { animation-delay: .11s; }
+  .slide.active .rise:nth-child(3) { animation-delay: .17s; }
+  .slide.active .rise:nth-child(4) { animation-delay: .23s; }
+  .slide.active .rise:nth-child(5) { animation-delay: .29s; }
+  .slide.active .rise:nth-child(6) { animation-delay: .35s; }
+
+  /* ── Code tokens ───────────────────────────────────── */
+  pre code { font-family: var(--theme-font-mono); }
+  .tok-k { color: var(--theme-syntax-key); }
+  .tok-s { color: var(--theme-syntax-string); }
+  .tok-n { color: var(--theme-syntax-number); }
+  .tok-c { color: var(--theme-syntax-comment); font-style: italic; }
+  .tok-f { color: var(--theme-syntax-flag); }
+
+  /* ── Misc ──────────────────────────────────────────── */
+  kbd {
+    display: inline-block;
+    padding: .1rem .4rem;
+    font-family: var(--theme-font-mono);
+    font-size: .72rem;
+    line-height: 1.1;
+    color: var(--theme-body-muted);
+    background: rgb(var(--theme-neutral-rgb) / 6%);
+    border: 1px solid rgb(var(--theme-neutral-rgb) / 14%);
+    border-bottom-width: 2px;
+    border-radius: .35rem;
+  }
+
+  .glow-ring { box-shadow: 0 0 0 1px color-mix(in srgb, var(--theme-accent) 35%, transparent), 0 18px 60px -24px color-mix(in srgb, var(--theme-accent) 70%, transparent); }
+
+  @keyframes float-slow {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50%      { transform: translateY(-14px) rotate(2deg); }
+  }
+  .float-slow { animation: float-slow 9s ease-in-out infinite; }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: .001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: .001ms !important;
+    }
+  }
+
+  /* ── Kubesimplify-inspired slide polish ──────────── */
+  :root {
+    --deck-accent-lime: var(--theme-accent-lime);
+    --deck-accent-cyan: var(--theme-accent-cyan);
+  }
+
+  .slide h1,
+  .slide h2,
+  .slide h3 {
+    text-wrap: balance;
+  }
+
+  .slide .slide-inner [class*="rounded-2xl"][class*="border-white/10"] {
+    background-image:
+      linear-gradient(135deg, color-mix(in srgb, var(--deck-accent-lime) 4%, transparent), transparent 48%, color-mix(in srgb, var(--deck-accent-cyan) 5%, transparent));
+    box-shadow: 0 18px 48px -38px color-mix(in srgb, var(--deck-accent-cyan) 42%, transparent);
+  }
+
+  .slide pre {
+    border-color: color-mix(in srgb, rgb(var(--theme-cyan-300)) 20%, transparent);
+    box-shadow:
+      inset 0 1px rgb(var(--theme-neutral-rgb) / 4%),
+      0 18px 44px -34px color-mix(in srgb, var(--deck-accent-cyan) 50%, transparent);
+  }
+
+  @media (hover: hover) and (prefers-reduced-motion: no-preference) {
+    .slide .slide-inner [class*="rounded-2xl"][class*="border-white/10"] {
+      transition: border-color .25s ease, box-shadow .25s ease, transform .25s ease;
+    }
+
+    .slide .slide-inner [class*="rounded-2xl"][class*="border-white/10"]:hover {
+      border-color: color-mix(in srgb, var(--deck-accent-cyan) 36%, transparent);
+      box-shadow: 0 22px 54px -34px color-mix(in srgb, var(--deck-accent-cyan) 52%, transparent);
+      transform: translateY(-2px);
+    }
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--deck-accent-lime);
+    outline-offset: 3px;
+  }
+
+  ::selection {
+    color: var(--theme-background);
+    background: var(--deck-accent-cyan);
+  }
+
+/* ── Print / PDF export ────────────────────────────── */
+@media print {
+  @page {
+    size: A4 landscape;
+    margin: 0;
+  }
+
+  /* Force colour preservation (no deprecated color-adjust) */
+  * {
+    -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
+  }
+
+  html, body {
+    overflow: visible !important;
+    height: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: var(--theme-background) !important;
+  }
+
+  /* Hide ONLY the app chrome — the top bar is a direct child of <body>,
+     the slide headers are inside .slide and must NOT be hidden. */
+  body > header,
+  body > footer,
+  body > div.fixed.inset-x-0.top-0,
+  #scrim,
+  #menu,
+  #progress,
+  #bg {
+    display: none !important;
+  }
+
+  /* Deck becomes a normal document */
+  #deck {
+    position: static !important;
+    inset: auto !important;
+    display: block !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  /* Each slide = exactly one A4 landscape page */
+  .slide {
+    position: relative !important;
+    inset: auto !important;
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+    overflow: hidden !important;
+
+    width: 297mm !important;
+    height: 210mm !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: var(--theme-background) !important;
+
+    page-break-after: always;
+    break-after: page;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  .slide:last-child {
+    page-break-after: auto;
+    break-after: auto;
+  }
+
+  /* Slide content container */
+  .slide-inner {
+    box-sizing: border-box !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: 100% !important;
+    min-height: 0 !important;
+    padding: 14mm !important;  /* extra top = room for ::before bar */
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important;  /* was center — this was clipping the header */
+  }
+
+  /* Scale desktop typography so it fits the page */
+  .slide h1 {
+    font-size: 48px !important;
+    line-height: 1 !important;
+  }
+  .slide h2 {
+    font-size: 30px !important;
+    line-height: 1.1 !important;
+  }
+  .slide h3 {
+    font-size: 13px !important;
+  }
+  .slide p,
+  .slide li {
+    font-size: 11px !important;
+    line-height: 1.4 !important;
+  }
+  .slide header p {
+    font-size: 12px !important;
+  }
+  .slide pre,
+  .slide pre code {
+    font-size: 9px !important;
+    line-height: 1.35 !important;
+  }
+
+  /* Keep cards and code blocks from splitting across pages */
+  .slide .rounded-2xl,
+  .slide .rounded-xl,
+  .slide pre,
+  .slide header {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  /* Disable entrance animation so all content is visible immediately */
+  .rise {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+    /* ─────────────────────────────────────────────────
+    Force desktop grid layouts — Tailwind's responsive
+    breakpoints don't fire in Chrome's print viewport,
+    so we re-declare every grid used in the deck.
+    ───────────────────────────────────────────────── */
+  [class*="grid-cols-2"] { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+  [class*="grid-cols-3"] { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; }
+  [class*="grid-cols-4"] { grid-template-columns: repeat(4, minmax(0, 1fr)) !important; }
+
+  /* Arbitrary-value grids (custom fr ratios) */
+  [class*="grid-cols-[1.5fr_1fr]"] { grid-template-columns: 1.5fr 1fr !important; }
+  [class*="grid-cols-[1.05fr_1fr]"] { grid-template-columns: 1.05fr 1fr !important; }
+  [class*="grid-cols-[1fr_1.05fr]"] { grid-template-columns: 1fr 1.05fr !important; }
+  [class*="grid-cols-[1fr_1.1fr]"] { grid-template-columns: 1fr 1.1fr !important; }
+  [class*="grid-cols-[1.1fr_1fr]"] { grid-template-columns: 1.1fr 1fr !important; }
+  [class*="grid-cols-[minmax(0,0.85fr)_minmax(0,1.35fr)]"] {
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.35fr) !important;
+  }
+
+  /* ─────────────────────────────────────────────────
+    Code blocks inside grid columns must stay
+    constrained to their cell, not the whole page.
+    ───────────────────────────────────────────────── */
+  .slide pre {
+    max-width: 100% !important;
+    overflow: hidden !important;
+  }
+  .slide pre code {
+    display: block !important;
+    white-space: pre-wrap !important;
+    word-break: break-word !important;
+    overflow-wrap: anywhere !important;
+  }
+
+    /* ── Slide 1 (title) print overrides ──────────────── */
+
+  /* Restore vertical centering — safe for this slide
+    because its content is short and won't clip. */
+  .slide[data-title="Title"] .slide-inner {
+    justify-content: center !important;
+  }
+
+  /* Force the SVG wrapper visible.
+    `lg:flex` never fires in the print viewport,
+    so we match the class string directly. */
+  .slide[data-title="Title"] [class*="lg:flex"] {
+    display: flex !important;
+  }
+
+  /* Keep the wheel a reasonable size for print */
+  .slide[data-title="Title"] svg.float-slow {
+    width: 180px !important;
+    height: 180px !important;
+    animation: none !important;
+  }
+
+  /* Let the hero title breathe — it's the cover slide */
+  .slide[data-title="Title"] h1 {
+    font-size: 72px !important;
+    line-height: 1 !important;
+  }
+
+  .slide[data-title="Title"] p {
+    font-size: 13px !important;
+  }
+
+  /* Also force the two-column cover layout to hold
+    (1.5fr main text  |  1fr SVG) — Tailwind's lg: variant
+    is the same class string we already match for grids. */
+  .slide[data-title="Title"] [class*="lg:grid-cols-[1.5fr_1fr]"] {
+    grid-template-columns: 1.5fr 1fr !important;
+  }
+  
+    /* ── Slide 16 (Thank You) print overrides ────────── */
+  .slide[data-title="Thank You"] .slide-inner {
+    justify-content: center !important;
+    align-items: center !important;
+    text-align: center !important;
+  }
+
+  .slide[data-title="Thank You"] h2 {
+    font-size: 68px !important;
+    line-height: 1 !important;
+  }
+
+  /* The inner column wrapper — keep it centered */
+  .slide[data-title="Thank You"] .slide-inner > div {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    width: 100% !important;
+    margin: 0 auto !important;
+  }
+
+  /* Keep the gradient text visible in print */
+  .slide[data-title="Thank You"] [class*="bg-clip-text"] {
+    -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
+  }
+  
+}

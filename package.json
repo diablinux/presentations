@@ -1,0 +1,30 @@
+{
+  "name": "kubernetes-slide-deck-template",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "playwright test",
+    "test:smoke": "playwright test tests/deck.spec.js",
+    "pdf": "node scripts/export-pdf.mjs",
+    "handout": "node scripts/export-pdf.mjs --handout",
+    "new-talk": "node scripts/new-talk.mjs",
+    "build:site": "node scripts/build-site.mjs"
+  },
+  "dependencies": {
+    "@fontsource/inter": "^5.2.6",
+    "@fontsource/jetbrains-mono": "^5.2.6",
+    "markdown-it": "^14.1.0",
+    "qrcode": "^1.5.4",
+    "yaml": "^2.8.1"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.55.0",
+    "@tailwindcss/vite": "^4.3.3",
+    "tailwindcss": "^4.3.3",
+    "vite": "^6.3.5"
+  }
+}
