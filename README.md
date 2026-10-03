@@ -1,4 +1,4 @@
-# Kubernetes slide deck template
+# Slide deck template
 
 [![Build and publish slides](https://github.com/diablinux/presentations/actions/workflows/deploy.yml/badge.svg)](https://github.com/diablinux/presentations/actions/workflows/deploy.yml)
 [![Live slides](https://img.shields.io/badge/slides-live-brightgreen?logo=github)](https://diablinux.github.io/presentations/)
