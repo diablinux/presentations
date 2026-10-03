@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="description" content="An interactive, keyboard-friendly presentation covering Kubernetes concepts." />
+<title>Kubernetes Concepts — Slides</title>
+</head>
+
+<body class="text-slate-200">
+
+<div id="bg"></div>
+
+<!-- ═══════════ TOP BAR ═══════════ -->
+<header class="fixed inset-x-0 top-0 z-40 flex h-14 items-center justify-between border-b border-white/5 bg-slate-950/55 px-4 backdrop-blur-md md:px-8">
+  <div class="flex items-center gap-3">
+    <svg viewBox="0 0 100 100" class="h-6 w-6 text-k8s-400" fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="round">
+      <polygon points="50,4 86,21.3 94.8,60.2 70,91.4 30,91.4 5.2,60.2 14,21.3" />
+      <circle cx="50" cy="50" r="10" fill="currentColor" stroke="none" />
+      <g stroke-width="3" stroke-linecap="round">
+        <line x1="50" y1="50" x2="50" y2="4"/>
+        <line x1="50" y1="50" x2="86" y2="21.3"/>
+        <line x1="50" y1="50" x2="94.8" y2="60.2"/>
+        <line x1="50" y1="50" x2="70" y2="91.4"/>
+        <line x1="50" y1="50" x2="30" y2="91.4"/>
+        <line x1="50" y1="50" x2="5.2" y2="60.2"/>
+        <line x1="50" y1="50" x2="14" y2="21.3"/>
+      </g>
+    </svg>
+    <span class="text-sm font-semibold tracking-tight text-white">Kubernetes<span class="text-k8s-400">.</span>Concepts</span>
+  </div>
+
+  <div class="flex items-center gap-2">
+    <span id="counter" class="hidden font-mono text-xs tabular-nums text-slate-500 sm:inline">01/17</span>
+    <button id="presenterBtn" type="button"
+      class="hidden h-9 items-center rounded-lg border border-white/10 bg-white/5 px-3 text-sm text-slate-300 transition hover:bg-white/10 hover:text-white md:inline-flex"
+      aria-label="Open presenter view">Presenter</button>
+    <button id="menuBtn" type="button"
+      class="flex h-9 w-9 items-center justify-center rounded-lg border border-white/10 bg-white/5 text-slate-300 transition hover:bg-white/10 hover:text-white"
+      aria-label="Open outline">
+      <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <path d="M4 6h16M4 12h16M4 18h10"/>
+      </svg>
+    </button>
+  </div>
+</header>
+
+<!-- ═══════════ PROGRESS ═══════════ -->
+<div class="fixed inset-x-0 top-0 z-50 h-[3px] bg-white/5">
+  <div id="progress" class="h-full w-0 bg-gradient-to-r from-k8s-500 via-k8s-400 to-cyan-400 transition-[width] duration-500 ease-out"></div>
+</div>
+
+<!-- ═══════════ SLIDES ═══════════ -->
+<main id="deck" class="fixed inset-0 z-10" aria-label="Presentation slides" aria-live="polite">
+
+  <!-- ───── 1. Title ───── -->
+  
+
+  <!-- ───── 2. What is Kubernetes ───── -->
+  
+
+  <!-- ───── 3. Cluster Architecture ───── -->
+  
+
+  <!-- ───── 4. Control Plane ───── -->
+  
+
+  <!-- ───── 5. Worker Nodes ───── -->
+  
+
+  <!-- ───── 6. Pods ───── -->
+  
+
+  <!-- ───── 7. Deployments ───── -->
+  
+
+  <!-- ───── 8. Services ───── -->
+  
+
+  <!-- ───── 9. ConfigMaps & Secrets ───── -->
+  
+
+  <!-- ───── 10. Storage ───── -->
+  
+
+  <!-- ───── 11. Ingress ───── -->
+  
+
+  <!-- ───── 12. Namespaces / Labels ───── -->
+  
+
+  <!-- ───── 13. kubectl ───── -->
+  
+
+  <!-- ───── 14. Probes & Autoscaling ───── -->
+  
+
+  <!-- ───── 15. Takeaways ───── -->
+  
+
+  <!-- ───── 16. Thank You ───── -->
+
+
+</main>
+
+<!-- ═══════════ BOTTOM BAR ═══════════ -->
+<footer class="fixed inset-x-0 bottom-0 z-40 flex h-16 items-center justify-between border-t border-white/5 bg-slate-950/55 px-4 backdrop-blur-md md:px-8">
+    <!-- Left: Export + keyboard hint -->
+  <div class="flex items-center gap-2">
+    <button id="exportPdf" type="button"
+      class="flex h-9 items-center gap-1.5 rounded-lg border border-white/10 bg-white/5 px-3 text-sm text-slate-300 transition hover:bg-white/10 hover:text-white"
+      aria-label="Export to PDF">
+      <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M5 21h14"/>
+      </svg>
+      <span class="hidden sm:inline">PDF</span>
+    </button>
+  </div>
+
+  <div class="hidden items-center gap-2 text-xs text-slate-600 sm:flex">
+    <kbd>←</kbd><kbd>→</kbd><span class="ml-1">navigate</span> &nbsp;·&nbsp; <kbd>M</kbd> outline &nbsp;·&nbsp; <kbd>F</kbd> fullscreen
+  </div>
+
+  <div class="flex items-center gap-2">
+    <button id="prev" type="button"
+      class="flex h-9 items-center gap-1.5 rounded-lg border border-white/10 bg-white/5 px-3 text-sm text-slate-300 transition hover:bg-white/10 hover:text-white disabled:opacity-30 disabled:hover:bg-white/5"
+      aria-label="Previous slide">
+      <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+      <span class="hidden sm:inline">Prev</span>
+    </button>
+
+    <span id="counterMobile" class="font-mono text-xs tabular-nums text-slate-500 sm:hidden">01/17</span>
+
+    <button id="next" type="button"
+      class="flex h-9 items-center gap-1.5 rounded-lg border border-k8s-500/40 bg-k8s-500/20 px-3 text-sm font-medium text-k8s-100 transition hover:bg-k8s-500/35 disabled:opacity-30"
+      aria-label="Next slide">
+      <span class="hidden sm:inline">Next</span>
+      <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+    </button>
+  </div>
+</footer>
+
+<!-- ═══════════ OUTLINE DRAWER ═══════════ -->
+<div id="scrim" class="fixed inset-0 z-40 hidden bg-black/60 backdrop-blur-sm"></div>
+
+<aside id="menu"
+  class="fixed inset-y-0 right-0 z-50 flex w-80 max-w-[85vw] translate-x-full flex-col border-l border-white/10 bg-slate-950/95 backdrop-blur-xl transition-transform duration-300 ease-out">
+  <div class="flex h-14 shrink-0 items-center justify-between border-b border-white/5 px-5">
+    <span class="text-[11px] font-semibold uppercase tracking-[0.25em] text-slate-400">Outline</span>
+    <button id="menuClose" type="button"
+      class="flex h-8 w-8 items-center justify-center rounded-lg text-slate-400 transition hover:bg-white/10 hover:text-white"
+      aria-label="Close outline">
+      <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
+  </div>
+  <nav id="menuList" class="flex-1 overflow-y-auto p-3"></nav>
+</aside>
+
+<!-- ═══════════ SCRIPT ═══════════ -->
+<script type="module" src="/src/main.js"></script>
+
+</body>
+</html>
