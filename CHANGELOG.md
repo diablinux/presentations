@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- Add README badges and an MIT `LICENSE`.
 - Publish the Kubernetes example and every talk to GitHub Pages via `npm run build:site`.
 - Add `AGENT.md` authoring guide and OpenShift vs Kubernetes and AI Observability example talks.
 

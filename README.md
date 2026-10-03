@@ -1,6 +1,21 @@
+[![Build and publish slides](https://github.com/diablinux/presentations/actions/workflows/deploy.yml/badge.svg)](https://github.com/diablinux/presentations/actions/workflows/deploy.yml)
+
+[![Build and publish](https://github.com/diablinux/presentations/actions/workflows/deploy.yml/badge.svg)](https://github.com/diablinux/presentations/actions/workflows/deploy.yml)
+[![Live slides](https://img.shields.io/badge/slides-live-brightgreen?logo=github)](https://diablinux.github.io/presentations/)
+[![License: MIT](https://img.shields.io/github/license/diablinux/presentations)](./LICENSE)
+![Vite](https://img.shields.io/badge/Vite-6-646CFF?logo=vite&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4-06B6D4?logo=tailwindcss&logoColor=white)
+![Node](https://img.shields.io/badge/Node-%E2%89%A520.19-339933?logo=nodedotjs&logoColor=white)
+![Playwright](https://img.shields.io/badge/tested_with-Playwright-2EAD33?logo=playwright&logoColor=white)
+![WCAG AA](https://img.shields.io/badge/a11y-WCAG_AA_contrast-success)
+![Offline](https://img.shields.io/badge/output-single_HTML_%C2%B7_offline-blue)
+![Last commit](https://img.shields.io/github/last-commit/diablinux/presentations)
+
 # Kubernetes slide deck template
 
 A browser-based slide deck and a reusable template for technical talks. The example is authored in Markdown, styled with Tailwind CSS, and built into one self-contained HTML file with locally bundled fonts. The source code and current feature checklist are in the project; the Kubernetes presentation is the working example.
+
+[https://diablinux.github.io/presentations/]
 
 ## Requirements
 
@@ -21,7 +36,7 @@ Open the local URL printed by Vite. Changes to Markdown, JavaScript, and CSS rel
 npm run build
 ```
 
-The output is `dist/kubernetes-concepts-deepseek.html`. It includes the scripts, styles, Tailwind utilities, and Inter / JetBrains Mono fonts, and can be opened directly in a browser without a build server or internet connection.
+The output is `dist/kubernetes-concepts.html`. It includes the scripts, styles, Tailwind utilities, and Inter / JetBrains Mono fonts, and can be opened directly in a browser without a build server or internet connection.
 
 For offline cache support, serve the `dist/` folder over `http://localhost` or HTTPS, open the deck once, then reload after disconnecting from the network. Browsers do not allow service workers from `file://`; the self-contained HTML itself remains usable offline regardless.
 
@@ -153,3 +168,7 @@ The GitHub Actions workflow runs the tests, then `npm run build:site`, and publi
 ## Current scope
 
 The project supports Markdown-only slide sources, named reusable layouts, five themes, shared branding, notes, presenter view, overview and shortcut dialogs, deep links, accessibility modes, staged reveals, diagram/terminal/diff/QR components, PDF and handout exports, offline output, browser tests, and Pages deployment. The Kubernetes example and generated talks share the same Markdown authoring format and runtime.
+
+## License
+
+Released under the [MIT License](./LICENSE).
