@@ -1,0 +1,20 @@
+# Ignore node_modules
+node_modules/
+
+# Ignore build output
+dist/
+build/
+
+# Ignore temporary files
+*.log
+*.tmp
+
+# Ignore OS-specific files
+.DS_Store
+Thumbs.db
+
+TODO.md
+kubesimplify.css
+prompt.md
+TIPS AND TRICKS.md
+kubernetes-concepts-deepseek.html
