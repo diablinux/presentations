@@ -1,6 +1,6 @@
-[![Build and publish slides](https://github.com/diablinux/presentations/actions/workflows/deploy.yml/badge.svg)](https://github.com/diablinux/presentations/actions/workflows/deploy.yml)
+# Kubernetes slide deck template
 
-[![Build and publish](https://github.com/diablinux/presentations/actions/workflows/deploy.yml/badge.svg)](https://github.com/diablinux/presentations/actions/workflows/deploy.yml)
+[![Build and publish slides](https://github.com/diablinux/presentations/actions/workflows/deploy.yml/badge.svg)](https://github.com/diablinux/presentations/actions/workflows/deploy.yml)
 [![Live slides](https://img.shields.io/badge/slides-live-brightgreen?logo=github)](https://diablinux.github.io/presentations/)
 [![License: MIT](https://img.shields.io/github/license/diablinux/presentations)](./LICENSE)
 ![Vite](https://img.shields.io/badge/Vite-6-646CFF?logo=vite&logoColor=white)
@@ -11,7 +11,6 @@
 ![Offline](https://img.shields.io/badge/output-single_HTML_%C2%B7_offline-blue)
 ![Last commit](https://img.shields.io/github/last-commit/diablinux/presentations)
 
-# Kubernetes slide deck template
 
 A browser-based slide deck and a reusable template for technical talks. The example is authored in Markdown, styled with Tailwind CSS, and built into one self-contained HTML file with locally bundled fonts. The source code and current feature checklist are in the project; the Kubernetes presentation is the working example.
 
