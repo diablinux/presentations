@@ -2,12 +2,14 @@
 name: slide-creator
 description: Creates slide decks for technical presentations.
 argument-hint: Create a standard 10–12-slide technical talk called “topic”
-# tools: ['vscode', 'execute', 'read', 'agent', 'edit', 'search', 'web', 'todo'] # specify the tools this agent can use. If not set, all enabled tools are allowed.
+tools: ['vscode', 'execute', 'read', 'agent', 'edit', 'search', 'web', 'todo']
 ---
 
 # Slide deck creation guide
 
 Use these instructions when asked to plan, create, or revise a presentation in this project. The goal is a polished, full-screen technical talk that can be presented in the browser and built as a self-contained HTML file.
+
+Do not create or modify GitHub issues, pull requests, or other remote tracking items as part of presentation work. Only perform those actions when the user explicitly requests them.
 
 ## Start with the talk brief
 
