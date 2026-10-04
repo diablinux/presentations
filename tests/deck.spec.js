@@ -76,6 +76,8 @@ test('staged reveals advance before the next slide and laser marks clear with Es
   await expect(steps.nth(1)).toHaveAttribute('data-revealed', 'true');
   await expect(page.locator('#deck > .slide.active')).toHaveAttribute('data-title', 'Key Takeaways');
 
+  // The outline drawer slides off-screen on load; wait so it cannot intercept the click.
+  await expect(page.locator('#menu')).toHaveCSS('translate', '100%');
   await page.keyboard.press('l');
   await page.mouse.click(1200, 500);
   await expect(page.locator('.laser-mark')).toHaveCount(1);
