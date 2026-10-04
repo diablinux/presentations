@@ -1,6 +1,6 @@
 export default {
   title: "OpenShift vs Kubernetes",
-  theme: 'monochrome',
+  theme: 'redhat',
   brand: {
     name: 'Angel Cabrera',
     email: 'diablinux@gmail.com',

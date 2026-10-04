@@ -347,3 +347,49 @@ body.presenter-mode > #deck { display: none !important; }
   .slide-two-column,
   .slide-comparison { grid-template-columns: 1fr; }
 }
+
+/* Red Hat theme: black canvas, indigo glow, lavender surfaces, teal frames and red accents. */
+[data-theme="redhat"] #bg {
+  background:
+    radial-gradient(1000px 700px at -6% -10%, rgb(var(--theme-800) / 85%), transparent 62%),
+    radial-gradient(800px 520px at 108% 112%, rgb(var(--theme-900) / 70%), transparent 64%),
+    var(--theme-background);
+}
+[data-theme="redhat"] #bg::after { opacity: .55; }
+[data-theme="redhat"] .slide-card,
+[data-theme="redhat"] .slide-two-column > section,
+[data-theme="redhat"] .slide-comparison > section {
+  position: relative;
+  border: 1.5px solid color-mix(in srgb, var(--theme-highlight) 55%, transparent);
+  border-radius: 1.6rem;
+  background: linear-gradient(150deg, rgb(var(--theme-600) / 16%), rgb(var(--theme-800) / 10%));
+  box-shadow: 0 24px 60px -44px var(--theme-accent);
+}
+[data-theme="redhat"] .slide-card::before,
+[data-theme="redhat"] .slide-two-column > section::before,
+[data-theme="redhat"] .slide-comparison > section::before {
+  position: absolute;
+  inset-block-start: 1.1rem;
+  inset-inline-end: 1.1rem;
+  width: .7rem;
+  height: .7rem;
+  border-radius: .18rem;
+  background: var(--theme-red);
+  box-shadow: 0 0 1rem color-mix(in srgb, var(--theme-red) 70%, transparent);
+  content: "";
+}
+[data-theme="redhat"] .slide-comparison > section:first-child::before { background: rgb(var(--theme-300)); box-shadow: none; }
+[data-theme="redhat"] .slide-eyebrow { color: rgb(var(--theme-cyan-300)); }
+[data-theme="redhat"] .slide-cover-copy .slide-eyebrow::before { border-radius: .15rem; background: var(--theme-red); box-shadow: 0 0 1rem var(--theme-red); }
+[data-theme="redhat"] .slide-header h2::after {
+  display: block;
+  width: 4.5rem;
+  height: .3rem;
+  margin-top: .9rem;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--theme-red), rgb(var(--theme-400)));
+  content: "";
+}
+[data-theme="redhat"] .slide-tags li:first-child { border-color: color-mix(in srgb, var(--theme-red) 55%, transparent); color: var(--theme-white); }
+[data-theme="redhat"] .slide-prose blockquote { border-inline-start-color: var(--theme-red); }
+[data-theme="redhat"] .slide-prose pre { border-color: color-mix(in srgb, var(--theme-highlight) 35%, transparent); }

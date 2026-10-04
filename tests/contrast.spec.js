@@ -14,7 +14,7 @@ function contrastRatio(foreground, background) {
 }
 
 test('all visible slide text combinations meet WCAG AA contrast', async ({ page }) => {
-  const themes = ['kubernetes', 'docker', 'terraform', 'aws', 'monochrome'];
+  const themes = ['kubernetes', 'docker', 'terraform', 'aws', 'redhat', 'monochrome'];
   await page.goto('/');
   const audits = await page.evaluate(async (themesToAudit) => {
       const { applyTheme } = await import('/src/theme.js');

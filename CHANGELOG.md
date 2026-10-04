@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- Add the `redhat` theme and use it for the OpenShift vs Kubernetes and VMware migration talks.
 - Rename the Kubernetes example entry to `index.html` so every deck uses the same entry name, and remove the Kubernetes-specific file names from scripts, tests and the service worker.
 - Generate the offline service worker from one shared `src/service-worker.js` (scope-keyed caches) instead of copying `sw.js` into each talk.
 - Add README badges and an MIT `LICENSE`.

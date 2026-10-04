@@ -122,19 +122,20 @@ The generated HTML will include your latest Markdown content. Run `npm run pdf` 
 
 ## Themes and branding
 
-Change `brand` in [`src/theme.js`](./src/theme.js) to set the presenter name, email, company, logo, conference, and Q&A form URL. The cover and closing slides use the shared author and email values; optional company, logo, and conference fields are added to both. The Kubernetes example opts into its animated helm cover mark with `coverMark: 'kubernetes'`; generated talks omit that Kubernetes-specific art by default. The same file defines the five color palettes and the semantic surface, syntax, font, and spacing tokens used by the shared shell.
+Change `brand` in [`src/theme.js`](./src/theme.js) to set the presenter name, email, company, logo, conference, and Q&A form URL. The cover and closing slides use the shared author and email values; optional company, logo, and conference fields are added to both. The Kubernetes example opts into its animated helm cover mark with `coverMark: 'kubernetes'`; generated talks omit that Kubernetes-specific art by default. The same file defines the six color palettes and the semantic surface, syntax, font, and spacing tokens used by the shared shell.
 
-Five themes are available through the URL:
+Six themes are available through the URL:
 
 ```text
 ?theme=kubernetes
 ?theme=docker
 ?theme=terraform
 ?theme=aws
+?theme=redhat
 ?theme=monochrome
 ```
 
-Example: `index.html?theme=terraform#pods`. The deck also responds to the operating system's reduced-motion and increased-contrast preferences. Automated browser tests composite translucent backgrounds and check more than 100 text combinations plus gradient text stops in every theme against WCAG AA contrast.
+The `redhat` theme uses a black canvas with an indigo glow, lavender surfaces, teal outlines and red accents. Example: `index.html?theme=terraform#pods`. The deck also responds to the operating system's reduced-motion and increased-contrast preferences. Automated browser tests composite translucent backgrounds and check more than 100 text combinations plus gradient text stops in every theme against WCAG AA contrast.
 
 ## Build, test, and export
 
@@ -166,7 +167,7 @@ The GitHub Actions workflow runs the tests, then `npm run build:site`, and publi
 
 ## Current scope
 
-The project supports Markdown-only slide sources, named reusable layouts, five themes, shared branding, notes, presenter view, overview and shortcut dialogs, deep links, accessibility modes, staged reveals, diagram/terminal/diff/QR components, PDF and handout exports, offline output, browser tests, and Pages deployment. The Kubernetes example and generated talks share the same Markdown authoring format and runtime.
+The project supports Markdown-only slide sources, named reusable layouts, six themes, shared branding, notes, presenter view, overview and shortcut dialogs, deep links, accessibility modes, staged reveals, diagram/terminal/diff/QR components, PDF and handout exports, offline output, browser tests, and Pages deployment. The Kubernetes example and generated talks share the same Markdown authoring format and runtime.
 
 ## License
 

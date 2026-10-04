@@ -17,6 +17,7 @@ const sharedTokens = {
   'accent-cyan': '#05caff',
   success: '#22c55e',
   danger: '#f87171',
+  red: '#ee0000',
   qrDark: '#e2e8f0',
   qrLight: '#070b14',
   'font-sans': 'Inter, system-ui, sans-serif',
@@ -53,6 +54,19 @@ export const themes = {
     800: '154 52 18', 900: '124 45 18', 'cyan-300': '253 186 116', 'cyan-400': '251 146 60',
     accent: '#f97316', soft: '#fdba74', highlight: '#facc15'
   },
+  redhat: {
+    ...sharedTokens,
+    background: '#050508',
+    'background-rgb': '5 5 8',
+    'surface-rgb': '8 6 18',
+    qrLight: '#050508',
+    danger: '#ff6b6b',
+    red: '#ee0000',
+    50: '246 244 255', 100: '236 232 252', 200: '218 211 246', 300: '190 180 236',
+    400: '160 146 222', 500: '132 118 209', 600: '104 88 184', 700: '78 62 150',
+    800: '53 41 112', 900: '36 27 82', 'cyan-300': '153 224 220', 'cyan-400': '45 190 184',
+    accent: '#8476d1', soft: '#c4b9f0', highlight: '#2dbeb8'
+  },
   monochrome: {
     ...sharedTokens,
     50: '250 250 250', 100: '245 245 245', 200: '229 229 229', 300: '212 212 212',
@@ -86,7 +100,7 @@ export function applyTheme(name) {
   themeColorMeta.content = highContrast ? theme.black : theme.background;
   Object.entries(theme).forEach(([key, value]) => {
     if (highContrast && (/^\d+$/.test(key) || key.startsWith('cyan-'))) value = '255 255 255';
-    if (highContrast && ['accent', 'soft', 'highlight', 'body-text', 'body-muted', 'body-subtle', 'syntax-key', 'syntax-string', 'syntax-number', 'syntax-comment', 'syntax-flag', 'accent-lime', 'accent-cyan'].includes(key)) value = '#fff';
+    if (highContrast && ['accent', 'soft', 'highlight', 'red', 'body-text', 'body-muted', 'body-subtle', 'syntax-key', 'syntax-string', 'syntax-number', 'syntax-comment', 'syntax-flag', 'accent-lime', 'accent-cyan'].includes(key)) value = '#fff';
     if (highContrast && key === 'background') value = '#000';
     if (highContrast && key === 'background-rgb') value = '0 0 0';
     if (highContrast && key === 'surface-rgb') value = '0 0 0';
