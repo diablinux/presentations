@@ -14,7 +14,7 @@ Collect or infer: topic, audience, **shape**, theme, presenter name and email, a
 | `workshop` | 10–12 | prerequisites, three hands-on code blocks, gotchas |
 | `lightning` | 5–6 | what/why/how grid, one code slide, takeaways |
 
-Themes: `kubernetes`, `docker`, `terraform`, `aws`, `monochrome`.
+Themes: `kubernetes`, `docker`, `terraform`, `aws`, `redhat`, `monochrome`.
 
 ## 2. Workflow
 
@@ -91,7 +91,7 @@ Video, charts, three-column layouts, warning/info panels and raw HTML. Use `card
 ```js
 export default {
   title: "Talk title",
-  theme: 'docker',        // kubernetes | docker | terraform | aws | monochrome
+  theme: 'docker',        // kubernetes | docker | terraform | aws | redhat | monochrome
   brand: {
     name: 'Presenter',
     email: 'me@example.com',
