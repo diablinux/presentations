@@ -14,10 +14,6 @@ await mkdir(resolve(site, 'talks'), { recursive: true });
 
 run(root, 'run', 'build');
 await cp(resolve(root, 'dist'), resolve(site, 'kubernetes'), { recursive: true });
-await cp(
-  resolve(site, 'kubernetes/kubernetes-concepts-deepseek.html'),
-  resolve(site, 'kubernetes/index.html')
-);
 
 const entries = [{ title: 'Kubernetes Concepts', href: 'kubernetes/' }];
 const talkDirs = (await readdir(resolve(root, 'talks'), { withFileTypes: true }))

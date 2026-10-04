@@ -35,9 +35,9 @@ Open the local URL printed by Vite. Changes to Markdown, JavaScript, and CSS rel
 npm run build
 ```
 
-The output is `dist/kubernetes-concepts.html`. It includes the scripts, styles, Tailwind utilities, and Inter / JetBrains Mono fonts, and can be opened directly in a browser without a build server or internet connection.
+The output is `dist/index.html`. It includes the scripts, styles, Tailwind utilities, and Inter / JetBrains Mono fonts, and can be opened directly in a browser without a build server or internet connection.
 
-For offline cache support, serve the `dist/` folder over `http://localhost` or HTTPS, open the deck once, then reload after disconnecting from the network. Browsers do not allow service workers from `file://`; the self-contained HTML itself remains usable offline regardless.
+The build also emits `dist/sw.js`, a small service worker generated from [`src/service-worker.js`](./src/service-worker.js) (shared by every deck; there is nothing to copy into a talk). It caches the deck on first visit and serves it when the network is unavailable, with caches keyed per deck URL so decks on the same site do not interfere. For offline cache support, serve the `dist/` folder over `http://localhost` or HTTPS, open the deck once, then reload after disconnecting from the network. Browsers do not allow service workers from `file://`; the self-contained HTML itself remains usable offline regardless.
 
 ## Navigate and present
 
@@ -134,7 +134,7 @@ Five themes are available through the URL:
 ?theme=monochrome
 ```
 
-Example: `kubernetes-concepts-deepseek.html?theme=terraform#pods`. The deck also responds to the operating system's reduced-motion and increased-contrast preferences. Automated browser tests composite translucent backgrounds and check more than 100 text combinations plus gradient text stops in every theme against WCAG AA contrast.
+Example: `index.html?theme=terraform#pods`. The deck also responds to the operating system's reduced-motion and increased-contrast preferences. Automated browser tests composite translucent backgrounds and check more than 100 text combinations plus gradient text stops in every theme against WCAG AA contrast.
 
 ## Build, test, and export
 

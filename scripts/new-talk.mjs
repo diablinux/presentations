@@ -1,4 +1,4 @@
-import { mkdir, readFile, writeFile, copyFile } from 'node:fs/promises';
+import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 
 const args = process.argv.slice(2);
@@ -100,7 +100,6 @@ const templateFiles = [
   writeFile(resolve(slides, '02-thank-you.md'), closing, { flag: 'wx' }),
   writeFile(resolve(destination, 'README.md'), readme, { flag: 'wx' }),
   writeFile(resolve(destination, 'package.json'), `${JSON.stringify(packageManifest, null, 2)}\n`, { flag: 'wx' }),
-  copyFile(resolve(root, 'public/sw.js'), resolve(destination, 'public/sw.js'))
 ];
 await Promise.all(templateFiles);
 console.log(`Created a Markdown talk project at ${destination}`);

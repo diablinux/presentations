@@ -1,6 +1,6 @@
 import { defineConfig } from 'vite';
 import tailwindcss from '@tailwindcss/vite';
-import { existsSync } from 'node:fs';
+import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 
 function inlineAssets() {
@@ -39,8 +39,25 @@ function inlineAssets() {
   };
 }
 
+// Emits the shared offline service worker as `sw.js` for builds and the dev server.
+function serviceWorker() {
+  const source = () => readFileSync(resolve(import.meta.dirname, 'src/service-worker.js'), 'utf8');
+  return {
+    name: 'deck-service-worker',
+    generateBundle() {
+      this.emitFile({ type: 'asset', fileName: 'sw.js', source: source() });
+    },
+    configureServer(server) {
+      server.middlewares.use('/sw.js', (_request, response) => {
+        response.setHeader('Content-Type', 'text/javascript; charset=utf-8');
+        response.end(source());
+      });
+    }
+  };
+}
+
 export default defineConfig({
-  plugins: [tailwindcss(), inlineAssets()],
+  plugins: [tailwindcss(), inlineAssets(), serviceWorker()],
   root: process.cwd(),
   server: {
     fs: {
@@ -52,9 +69,7 @@ export default defineConfig({
     assetsInlineLimit: Infinity,
     cssCodeSplit: false,
     rollupOptions: {
-      input: existsSync(resolve(process.cwd(), 'index.html'))
-        ? 'index.html'
-        : 'kubernetes-concepts-deepseek.html',
+      input: 'index.html',
       output: {
         inlineDynamicImports: true
       }

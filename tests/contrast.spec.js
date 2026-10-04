@@ -15,7 +15,7 @@ function contrastRatio(foreground, background) {
 
 test('all visible slide text combinations meet WCAG AA contrast', async ({ page }) => {
   const themes = ['kubernetes', 'docker', 'terraform', 'aws', 'monochrome'];
-  await page.goto('/kubernetes-concepts-deepseek.html');
+  await page.goto('/');
   const audits = await page.evaluate(async (themesToAudit) => {
       const { applyTheme } = await import('/src/theme.js');
       const canvas = document.createElement('canvas');
@@ -91,7 +91,7 @@ test('all visible slide text combinations meet WCAG AA contrast', async ({ page 
 });
 
 test('OS increased-contrast preference updates deck colors without reloading', async ({ page }) => {
-  await page.goto('/kubernetes-concepts-deepseek.html');
+  await page.goto('/');
   await page.emulateMedia({ contrast: 'more' });
   await expect(page.locator('.slide.active h1')).toHaveCSS('-webkit-text-fill-color', 'rgb(255, 255, 255)');
 });

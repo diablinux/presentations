@@ -3,7 +3,7 @@ import { expect, test } from '@playwright/test';
 test('loads every slide and navigates with numeric and named deep links', async ({ page }) => {
   const errors = [];
   page.on('pageerror', (error) => errors.push(error.message));
-  await page.goto('/kubernetes-concepts-deepseek.html#1');
+  await page.goto('/#1');
   await expect(page.locator('#deck > .slide')).toHaveCount(17);
   await expect(page.locator('#deck > .slide.active')).toHaveAttribute('data-title', 'Title');
   await expect(page.locator('#deck > .slide.active .slide-hero-mark')).toHaveCount(1);
@@ -17,13 +17,13 @@ test('loads every slide and navigates with numeric and named deep links', async 
     await page.keyboard.press('ArrowRight');
   }
   await expect(page.locator('#deck > .slide.active')).toHaveAttribute('data-title', 'Thank You');
-  await page.goto('/kubernetes-concepts-deepseek.html#services');
+  await page.goto('/#services');
   await expect(page.locator('#deck > .slide.active')).toHaveAttribute('data-title', 'Services');
   expect(errors).toEqual([]);
 });
 
 test('opens the slide overview and navigates from a thumbnail', async ({ page }) => {
-  await page.goto('/kubernetes-concepts-deepseek.html');
+  await page.goto('/');
   await page.keyboard.press('o');
   await expect(page.getByRole('dialog', { name: 'Slide overview' })).toBeVisible();
   await page.locator('#overviewDialog .overview-grid > button').nth(7).click();
@@ -32,7 +32,7 @@ test('opens the slide overview and navigates from a thumbnail', async ({ page })
 });
 
 test('overview arrow keys move thumbnail focus without changing the slide', async ({ page }) => {
-  await page.goto('/kubernetes-concepts-deepseek.html');
+  await page.goto('/');
   await page.keyboard.press('o');
   const first = page.locator('#overviewDialog .overview-grid > button').first();
   await expect(first).toBeFocused();
@@ -42,7 +42,7 @@ test('overview arrow keys move thumbnail focus without changing the slide', asyn
 });
 
 test('provides semantic slide focus, speaker notes and theme query support', async ({ page }) => {
-  await page.goto('/kubernetes-concepts-deepseek.html?theme=terraform#pods');
+  await page.goto('/?theme=terraform#pods');
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'terraform');
   await expect(page.locator('#deck > .slide.active')).toHaveAttribute('role', 'group');
   await expect(page.locator('#deck > .slide.active')).toHaveAttribute('aria-roledescription', 'slide');
@@ -51,7 +51,7 @@ test('provides semantic slide focus, speaker notes and theme query support', asy
 });
 
 test('linear reading mode exposes the complete deck without fixed controls', async ({ page }) => {
-  await page.goto('/kubernetes-concepts-deepseek.html?view=linear');
+  await page.goto('/?view=linear');
   await expect(page.locator('body')).toHaveClass(/linear-mode/);
   await expect(page.locator('#deck > .slide')).toHaveCount(17);
   await expect(page.locator('body > footer')).toBeHidden();
@@ -59,7 +59,7 @@ test('linear reading mode exposes the complete deck without fixed controls', asy
 });
 
 test('shortcut help lists presentation controls', async ({ page }) => {
-  await page.goto('/kubernetes-concepts-deepseek.html');
+  await page.goto('/');
   await page.keyboard.press('?');
   await expect(page.getByRole('dialog', { name: 'Keyboard shortcuts' })).toBeVisible();
   await expect(page.getByText('Open presenter view')).toBeVisible();
@@ -68,7 +68,7 @@ test('shortcut help lists presentation controls', async ({ page }) => {
 });
 
 test('staged reveals advance before the next slide and laser marks clear with Escape', async ({ page }) => {
-  await page.goto('/kubernetes-concepts-deepseek.html#key-takeaways');
+  await page.goto('/#key-takeaways');
   const steps = page.locator('#deck > .slide.active [data-reveal-step]');
   await expect(steps.nth(0)).toHaveAttribute('data-revealed', 'true');
   await expect(steps.nth(1)).toHaveAttribute('data-revealed', 'false');
@@ -84,7 +84,7 @@ test('staged reveals advance before the next slide and laser marks clear with Es
 });
 
 test('configures section markers, architecture flow, and Q&A QR from talk config', async ({ page }) => {
-  await page.goto('/kubernetes-concepts-deepseek.html');
+  await page.goto('/');
   await expect(page.locator('#progressMarkers span')).toHaveCount(17);
   await expect(page.locator('#progressMarkers .is-section').count()).resolves.toBeGreaterThan(1);
   await expect(page.locator('#deck [data-title="Cluster Architecture"] .diagram-flow')).toHaveCount(1);
@@ -94,7 +94,7 @@ test('configures section markers, architecture flow, and Q&A QR from talk config
 });
 
 test('opens a synchronized presenter window and supports presenter-side navigation', async ({ page }) => {
-  await page.goto('/kubernetes-concepts-deepseek.html#services');
+  await page.goto('/#services');
   const popupPromise = page.waitForEvent('popup');
   await page.getByRole('button', { name: 'Open presenter view' }).click();
   const presenter = await popupPromise;
@@ -112,7 +112,7 @@ test('opens a synchronized presenter window and supports presenter-side navigati
 });
 
 test('renders terminal and code-diff components with text-only content', async ({ page }) => {
-  await page.goto('/kubernetes-concepts-deepseek.html#kubectl-essentials');
+  await page.goto('/#kubectl-essentials');
   const authoredTerminal = page.locator('#deck [data-title="kubectl Essentials"] [data-terminal]');
   await expect(authoredTerminal).toHaveCount(1);
   await authoredTerminal.getByRole('button', { name: 'Run command' }).click();
@@ -140,7 +140,7 @@ test('renders terminal and code-diff components with text-only content', async (
 });
 
 test('uses the service worker cache when the network goes offline', async ({ page, context }) => {
-  await page.goto('/kubernetes-concepts-deepseek.html');
+  await page.goto('/');
   await page.evaluate(() => navigator.serviceWorker.register('./sw.js'));
   await page.waitForFunction(async () => {
     const registrations = await navigator.serviceWorker.getRegistrations();
@@ -155,7 +155,7 @@ test('uses the service worker cache when the network goes offline', async ({ pag
 });
 
 test('sets four-up slide dimensions for handout printing', async ({ page }) => {
-  await page.goto('/kubernetes-concepts-deepseek.html?handout=1');
+  await page.goto('/?handout=1');
   await page.emulateMedia({ media: 'print' });
   const layout = await page.locator('#deck').evaluate((deck) => {
     const style = getComputedStyle(deck);

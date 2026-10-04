@@ -10,10 +10,7 @@ const isProject = process.argv.includes('--project');
 const root = isProject ? process.cwd() : resolve(import.meta.dirname, '..');
 const outputDir = resolve(root, 'dist');
 const exportName = isProject ? basename(root) : 'kubernetes-concepts';
-const entryName = existsSync(resolve(root, 'kubernetes-concepts-deepseek.html'))
-  ? 'kubernetes-concepts-deepseek.html'
-  : 'index.html';
-const htmlPath = resolve(outputDir, entryName);
+const htmlPath = resolve(outputDir, 'index.html');
 const outputPath = resolve(outputDir, `${exportName}${handout ? '-handout' : ''}.pdf`);
 const otherExportName = `${exportName}${handout ? '' : '-handout'}.pdf`;
 const otherExportPath = resolve(outputDir, otherExportName);

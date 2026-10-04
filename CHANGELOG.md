@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Rename the Kubernetes example entry to `index.html` so every deck uses the same entry name, and remove the Kubernetes-specific file names from scripts, tests and the service worker.
+- Generate the offline service worker from one shared `src/service-worker.js` (scope-keyed caches) instead of copying `sw.js` into each talk.
 - Add README badges and an MIT `LICENSE`.
 - Publish the Kubernetes example and every talk to GitHub Pages via `npm run build:site`.
 - Add `AGENT.md` authoring guide and OpenShift vs Kubernetes and AI Observability example talks.

@@ -9,7 +9,7 @@
 
 @import "tailwindcss";
 
-@source "../kubernetes-concepts-deepseek.html";
+@source "../index.html";
 @source "../content";
 @source "../talks";
 @source "./";

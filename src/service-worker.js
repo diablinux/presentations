@@ -1,50 +1,42 @@
-const CACHE_NAME = 'kubernetes-slides-v3';
-const DECK_CANDIDATES = [
-  new URL('./index.html', self.registration.scope).href,
-  new URL('./kubernetes-concepts-deepseek.html', self.registration.scope).href
-];
-let deckUrl;
+// Offline support shared by every deck. The build emits this file as `sw.js`
+// next to each deck's `index.html` (see `serviceWorker()` in vite.config.js).
+const CACHE_VERSION = 'v1';
+// Decks can share one origin (for example GitHub Pages), so caches are keyed by scope.
+const CACHE_PREFIX = `slides:${self.registration.scope}:`;
+const CACHE_NAME = `${CACHE_PREFIX}${CACHE_VERSION}`;
+const DECK_URL = new URL('./index.html', self.registration.scope).href;
 
 self.addEventListener('install', (event) => {
-  event.waitUntil((async () => {
-    const cache = await caches.open(CACHE_NAME);
-    for (const candidate of DECK_CANDIDATES) {
-      const response = await fetch(candidate);
-      if (!response.ok) continue;
-      await cache.put(candidate, response);
-      deckUrl = candidate;
-      return;
-    }
-    throw new Error(`Unable to find a deck entry point at ${DECK_CANDIDATES.join(' or ')}.`);
-  })());
+  event.waitUntil(caches.open(CACHE_NAME).then((cache) => cache.add(DECK_URL)));
   self.skipWaiting();
 });
 
 self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys().then((keys) => Promise.all(
-      keys.filter((key) => key.startsWith('kubernetes-slides-') && key !== CACHE_NAME)
+      keys.filter((key) => key.startsWith(CACHE_PREFIX) && key !== CACHE_NAME)
         .map((key) => caches.delete(key))
     ))
   );
   self.clients.claim();
 });
 
+// Network first so edits show immediately; fall back to the cache when offline.
 self.addEventListener('fetch', (event) => {
-  if (event.request.method !== 'GET' || new URL(event.request.url).origin !== self.location.origin) return;
+  const { request } = event;
+  if (request.method !== 'GET' || new URL(request.url).origin !== self.location.origin) return;
   event.respondWith(
-    fetch(event.request).then(async (response) => {
+    fetch(request).then(async (response) => {
       if (response.ok) {
         const copy = response.clone();
-        await caches.open(CACHE_NAME).then((cache) => cache.put(event.request, copy));
+        await caches.open(CACHE_NAME).then((cache) => cache.put(request, copy));
       }
       return response;
     }).catch(async () => {
-      const cached = await caches.match(event.request);
+      const cached = await caches.match(request);
       if (cached) return cached;
-      if (event.request.mode === 'navigate') {
-        const deck = await caches.match(deckUrl ?? DECK_CANDIDATES[0])
-          ?? await caches.match(DECK_CANDIDATES[1]);
+      if (request.mode === 'navigate') {
+        const deck = await caches.match(DECK_URL);
         if (deck) return deck;
       }
       return Response.error();
