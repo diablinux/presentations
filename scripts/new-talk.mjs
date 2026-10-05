@@ -59,27 +59,6 @@ subtitle: "Questions?"
 notes: "Invite questions and share your contact details."
 ---
 `;
-const readme = `# ${title}
-
-This talk uses the shared Markdown, layout, theme, accessibility, and presentation runtime.
-
-## Run and build
-
-From this directory (or \`npm run talk -- <name> all\` from the repository root):
-
-\`\`\`sh
-npm run dev
-npm run build
-npm run pdf
-npm run handout
-\`\`\`
-
-The commands use the parent template project's installed dependencies and shared Vite configuration. The standalone deck and generated PDFs are written to \`dist/\`.
-
-## Author slides
-
-Add numbered Markdown files to \`content/slides/\` (the only slides folder). Replace the two placeholder slides. Each file starts with YAML frontmatter; see the generated opening and closing slides for examples. Configure the title, theme, and speaker branding in \`talk.config.js\`. For supported layouts, components, keyboard controls, and themes, see the template [README](../../README.md).
-`;
 const packageManifest = {
   name: slug,
   private: true,
@@ -97,14 +76,13 @@ const templateFiles = [
   writeFile(resolve(destination, 'talk.config.js'), config, { flag: 'wx' }),
   writeFile(resolve(destination, 'src/main.js'), entry, { flag: 'wx' }),
   writeFile(resolve(slides, '01-welcome.md'), welcome, { flag: 'wx' }),
-  writeFile(resolve(slides, '02-thank-you.md'), closing, { flag: 'wx' }),
-  writeFile(resolve(destination, 'README.md'), readme, { flag: 'wx' }),
+  writeFile(resolve(slides, '99-thank-you.md'), closing, { flag: 'wx' }),
   writeFile(resolve(destination, 'package.json'), `${JSON.stringify(packageManifest, null, 2)}\n`, { flag: 'wx' }),
 ];
 await Promise.all(templateFiles);
 console.log(`Created a Markdown talk project at ${destination}
 
 Next steps:
-  1. Edit talks/${slug}/talk.config.js (title, theme, brand) and the README heading.
-  2. Replace talks/${slug}/content/slides/01-welcome.md and 02-thank-you.md (placeholders) and add the other slides in the same folder. Do not create any other slides folder.
+  1. Edit talks/${slug}/talk.config.js (title, theme, brand).
+  2. Replace talks/${slug}/content/slides/01-welcome.md and 99-thank-you.md (placeholders) and add the other slides in the same folder. Do not create any other slides folder.
   3. Validate and export: npm run talk -- ${slug} all   (output goes to talks/${slug}/dist/, never the root dist/)`);

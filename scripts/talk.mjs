@@ -56,6 +56,15 @@ function check() {
     if (/Your name|you@example\.com|Add a short subtitle|Introduce the talk and its goals|Invite questions and share/i.test(source)) errors.push(`${file}: scaffold placeholder text remains.`);
     if (layout === 'qa' && /example\.com/.test(readFileSync(resolve(dir, 'talk.config.js'), 'utf8'))) errors.push('talk.config.js: qa slide needs a real questionUrl.');
   }
+  const prefixes = new Set();
+  for (const { file } of slides) {
+    const prefix = file.slice(0, 2);
+    if (prefixes.has(prefix)) errors.push(`${file}: duplicate number prefix "${prefix}"; renumber so each slide has a unique prefix.`);
+    prefixes.add(prefix);
+  }
+  for (const slide of slides.slice(1, -1)) {
+    if (slide.layout === 'closing') errors.push(`${slide.file}: layout "closing" is only allowed on the last slide.`);
+  }
   if (slides.length) {
     if (slides[0].layout !== 'title') errors.push(`${slides[0].file}: first slide must use layout "title".`);
     if (slides.at(-1).layout !== 'closing') errors.push(`${slides.at(-1).file}: last slide must use layout "closing".`);
@@ -68,8 +77,6 @@ function check() {
   const config = readFileSync(resolve(dir, 'talk.config.js'), 'utf8');
   const title = config.match(/title:\s*["']([^"']+)["']/)?.[1];
   if (/Your name|you@example\.com/.test(config)) errors.push('talk.config.js: set brand.name and brand.email.');
-  const readmeTitle = readFileSync(resolve(dir, 'README.md'), 'utf8').match(/^#\s+(.+)$/m)?.[1];
-  if (title && readmeTitle !== title) errors.push(`README.md heading "${readmeTitle}" must match config title "${title}".`);
   if (slides[0] && title && slides[0].data.title !== title && !slides[0].data.heading) errors.push(`Cover title "${slides[0].data.title}" should match config title "${title}".`);
   if (errors.length) {
     console.error(`talks/${name}: ${errors.length} problem(s)\n- ${errors.join('\n- ')}`);

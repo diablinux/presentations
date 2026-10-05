@@ -23,13 +23,13 @@ Themes: `kubernetes`, `docker`, `terraform`, `aws`, `redhat`, `monochrome`.
 - The repository root is the **Kubernetes example deck**. Its `dist/`, `content/`, `src/` and `index.html` are NOT yours: never build, edit or export from the repository root for a new talk, and ignore the root `dist/`.
 - Everything for a new talk lives in `talks/<talk-name>/`. Slides go **only** in `talks/<talk-name>/content/slides/NN-name.md`. Never create a `slides/` folder or any other slide location, and never use other file formats or frontmatter keys than those in section 3.
 - All outputs go to `talks/<talk-name>/dist/`.
-- `new-talk` creates two placeholder slides (`01-welcome.md`, `02-thank-you.md`). They are placeholders: overwrite them with the real cover and closing slide, and add the rest of the deck next to them.
+- `new-talk` creates two placeholder slides (`01-welcome.md`, `99-thank-you.md`). They are placeholders: overwrite them with the real cover and closing slide, and add the rest of the deck between them (the closing file keeps a high number so it stays last; renumber it if the deck grows past 98 slides). Number prefixes must be unique and `closing` is only valid on the last slide.
 
 ### Steps
 
 1. `npm ci` only if `node_modules` is missing; `npx playwright install chromium` once (for PDFs/tests).
 2. `npm run new-talk -- --name <talk-name>` (run from the repository root).
-3. Edit `talks/<talk-name>/talk.config.js` (see section 3). The scaffold derives a title-cased name such as "Openshift Vs Kubernetes"; set the correct title in the config, the talk `README.md` heading and the cover slide (all three must match).
+3. Edit `talks/<talk-name>/talk.config.js` (see section 3). The scaffold derives a title-cased name such as "Openshift Vs Kubernetes"; set the correct title in the config and the cover slide (both must match).
 4. Write the deck in `talks/<talk-name>/content/slides/`. Files are two-digit prefixed (`01-welcome.md`); keep the closing slide last.
 5. From the repository root run `npm run talk -- <talk-name> check --shape <shape>` after writing slides. It validates structure, frontmatter, notes, slugs, layouts, placeholders and slide count and prints every problem. Fix all of them.
 6. Run `npm run talk -- <talk-name> all` to build, export the PDF and the four-per-page handout into `talks/<talk-name>/dist/` (`index.html`, `<talk-name>.pdf`, `<talk-name>-handout.pdf`). Each export verifies its own page count. (`build`, `pdf`, `handout` run one step; the same npm scripts also work from inside the talk folder.)
@@ -134,7 +134,6 @@ Presenter name and email always go in `brand`, never hard-coded in slides.
 - [ ] Slide count matches the shape; `slug`s are unique; closing slide is last
 - [ ] Every slide has `notes`
 - [ ] `talk.config.js` has the right title, theme, presenter name and email
-- [ ] The talk README title is correct
 - [ ] `npm run build`, `npm run pdf` and `npm run handout` succeed; page counts match the slide count
 - [ ] Cover title is not clipped and no unintended logo appears
 - [ ] No placeholder text remains ("Your name", `you@example.com`, scaffold subtitles, the `example.com` question URL if a `qa` slide is used)
