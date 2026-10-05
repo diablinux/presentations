@@ -155,7 +155,7 @@ PDFs are written under `dist/`. The **PDF** control remains available as a brows
 npm run new-talk -- --name my-new-talk
 ```
 
-This creates a complete `talks/my-new-talk/` project with opening and closing Markdown slides, an editable `talk.config.js`, and the same presentation runtime, layouts, themes, accessibility features, offline support, and build pipeline as the Kubernetes example. From the generated folder, run `npm run dev`, `npm run build`, `npm run pdf`, or `npm run handout`. The generated package uses the template project's installed dependencies and shared Vite/PDF tooling.
+This creates a complete `talks/my-new-talk/` project with opening and closing Markdown slides, an editable `talk.config.js`, and the same presentation runtime, layouts, themes, accessibility features, offline support, and build pipeline as the Kubernetes example. From the generated folder, run `npm run dev`, `npm run build`, `npm run pdf`, or `npm run handout`. The generated package uses the template project's installed dependencies and shared Vite/PDF tooling. From the repository root, `npm run talk -- my-new-talk check` validates the deck structure and `npm run talk -- my-new-talk all` builds it and exports both PDFs into `talks/my-new-talk/dist/`. The root `dist/` belongs only to the Kubernetes example.
 
 Add ordered Markdown files under `content/slides/` and edit `talk.config.js` to set the title, theme, and presenter branding. See the generated project's README for its quick start and this guide for the full authoring reference.
 

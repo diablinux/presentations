@@ -8,8 +8,8 @@ const slug = requestedName.toLowerCase().trim().replace(/[^a-z0-9]+/g, '-').repl
 if (!slug) throw new Error('Talk name must contain at least one letter or number.');
 
 const title = requestedName.trim().replace(/[-_]+/g, ' ').replace(/\b\w/g, (letter) => letter.toUpperCase());
-const destination = resolve('talks', slug);
 const root = resolve(import.meta.dirname, '..');
+const destination = resolve(root, 'talks', slug);
 const shell = await readFile(resolve(root, 'talks/template/index.html'), 'utf8');
 await mkdir(destination, { recursive: false });
 const slides = resolve(destination, 'content/slides');
@@ -65,7 +65,7 @@ This talk uses the shared Markdown, layout, theme, accessibility, and presentati
 
 ## Run and build
 
-From this directory:
+From this directory (or \`npm run talk -- <name> all\` from the repository root):
 
 \`\`\`sh
 npm run dev
@@ -78,7 +78,7 @@ The commands use the parent template project's installed dependencies and shared
 
 ## Author slides
 
-Add numbered Markdown files to \`content/slides/\`. Each file starts with YAML frontmatter; see the generated opening and closing slides for examples. Configure the title, theme, and speaker branding in \`talk.config.js\`. For supported layouts, components, keyboard controls, and themes, see the template [README](../../README.md).
+Add numbered Markdown files to \`content/slides/\` (the only slides folder). Replace the two placeholder slides. Each file starts with YAML frontmatter; see the generated opening and closing slides for examples. Configure the title, theme, and speaker branding in \`talk.config.js\`. For supported layouts, components, keyboard controls, and themes, see the template [README](../../README.md).
 `;
 const packageManifest = {
   name: slug,
@@ -102,4 +102,9 @@ const templateFiles = [
   writeFile(resolve(destination, 'package.json'), `${JSON.stringify(packageManifest, null, 2)}\n`, { flag: 'wx' }),
 ];
 await Promise.all(templateFiles);
-console.log(`Created a Markdown talk project at ${destination}`);
+console.log(`Created a Markdown talk project at ${destination}
+
+Next steps:
+  1. Edit talks/${slug}/talk.config.js (title, theme, brand) and the README heading.
+  2. Replace talks/${slug}/content/slides/01-welcome.md and 02-thank-you.md (placeholders) and add the other slides in the same folder. Do not create any other slides folder.
+  3. Validate and export: npm run talk -- ${slug} all   (output goes to talks/${slug}/dist/, never the root dist/)`);

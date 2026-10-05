@@ -12,6 +12,7 @@
     "pdf": "node scripts/export-pdf.mjs",
     "handout": "node scripts/export-pdf.mjs --handout",
     "new-talk": "node scripts/new-talk.mjs",
+    "talk": "node scripts/talk.mjs",
     "build:site": "node scripts/build-site.mjs"
   },
   "dependencies": {
