@@ -18,7 +18,7 @@ test('new-talk generates a Markdown deck using shared runtime and PDF tooling', 
       cwd: root,
       stdio: 'inherit'
     });
-    for (const slideName of ['01-welcome.md', '02-thank-you.md']) {
+    for (const slideName of ['01-welcome.md', '99-thank-you.md']) {
       const source = await readFile(resolve(project, 'content/slides', slideName), 'utf8');
       expect(source).not.toMatch(/<\/?[a-z][^>]*>/i);
     }

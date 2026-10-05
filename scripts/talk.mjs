@@ -26,7 +26,7 @@ function check() {
   const errors = [];
   const shape = rest.includes('--shape') ? rest[rest.indexOf('--shape') + 1] : undefined;
   for (const entry of readdirSync(dir)) {
-    if (!allowedEntries.has(entry)) errors.push(`Unexpected "${entry}" in talks/${name}/. Slides belong only in content/slides/; delete stray folders such as slides/.`);
+    if (entry !== '.DS_Store' && !allowedEntries.has(entry)) errors.push(`Unexpected "${entry}" in talks/${name}/. Slides belong only in content/slides/; delete stray folders such as slides/.`);
   }
   const slidesDir = resolve(dir, 'content/slides');
   const files = existsSync(slidesDir) ? readdirSync(slidesDir).sort() : [];
