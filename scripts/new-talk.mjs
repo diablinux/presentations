@@ -10,7 +10,7 @@ if (!slug) throw new Error('Talk name must contain at least one letter or number
 const title = requestedName.trim().replace(/[-_]+/g, ' ').replace(/\b\w/g, (letter) => letter.toUpperCase());
 const root = resolve(import.meta.dirname, '..');
 const destination = resolve(root, 'talks', slug);
-const shell = await readFile(resolve(root, 'talks/template/index.html'), 'utf8');
+const shell = await readFile(resolve(root, 'scripts/templates/talk-index.html'), 'utf8');
 await mkdir(destination, { recursive: false });
 const slides = resolve(destination, 'content/slides');
 await Promise.all([

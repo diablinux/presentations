@@ -17,7 +17,7 @@ await cp(resolve(root, 'dist'), resolve(site, 'kubernetes'), { recursive: true }
 
 const entries = [{ title: 'Kubernetes Concepts', href: 'kubernetes/' }];
 const talkDirs = (await readdir(resolve(root, 'talks'), { withFileTypes: true }))
-  .filter((entry) => entry.isDirectory() && entry.name !== 'template')
+  .filter((entry) => entry.isDirectory())
   .map((entry) => entry.name)
   .sort();
 

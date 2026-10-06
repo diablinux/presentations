@@ -33,7 +33,7 @@ Themes: `kubernetes`, `docker`, `terraform`, `aws`, `redhat`, `monochrome`.
 4. Write the deck in `talks/<talk-name>/content/slides/`. Files are two-digit prefixed (`01-welcome.md`); keep the closing slide last.
 5. From the repository root run `npm run talk -- <talk-name> check --shape <shape>` after writing slides. It validates structure, frontmatter, notes, slugs, layouts, placeholders and slide count and prints every problem. Fix all of them.
 6. Run `npm run talk -- <talk-name> all` to build, export the PDF and the four-per-page handout into `talks/<talk-name>/dist/` (`index.html`, `<talk-name>.pdf`, `<talk-name>-handout.pdf`). Each export verifies its own page count. (`build`, `pdf`, `handout` run one step; the same npm scripts also work from inside the talk folder.)
-7. Preview with `npm run dev` inside `talks/<talk-name>/` (http://127.0.0.1:5173/) and check the cover and several content slides visually.
+7. Preview with `npm run dev` inside `talks/<talk-name>/` ([http://127.0.0.1:5173/]) and check the cover and several content slides visually.
 8. Report the preview, build and PDF locations plus any assumptions.
 
 ## 3. Slide format
@@ -121,7 +121,7 @@ Presenter name and email always go in `brand`, never hard-coded in slides.
 - Do not use raw HTML in slide Markdown; tests forbid it in generated talks.
 - One idea per slide, short bullets, no walls of text. Avoid more than about 6 bullets per slide.
 - Keep claims accurate and vendor-neutral unless the topic is product-specific; avoid invented benchmarks, statistics, or version-specific claims. Note variability in speaker notes.
-- Edit only files inside `talks/<talk-name>/`; leave the root example, other talks, `src/` and `talks/template/` alone unless asked.
+- Edit only files inside `talks/<talk-name>/`; leave the root example, other talks, `src/` and `scripts/templates/` alone unless asked.
 - Do not commit, push, or create GitHub issues or pull requests unless asked. Every talk under `talks/` is published automatically by the Pages workflow (`npm run build:site`).
 - Never put secrets, tokens, or real personal data in slides or examples.
 - Code and config examples must be short and correct.

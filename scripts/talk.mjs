@@ -9,7 +9,7 @@ const [name, command = 'check', ...rest] = process.argv.slice(2);
 if (!name || name.startsWith('-')) fail(usage);
 
 const dir = resolve(root, 'talks', name);
-if (name === 'template' || !existsSync(resolve(dir, 'package.json'))) {
+if (!existsSync(resolve(dir, 'package.json'))) {
   fail(`talks/${name}/ does not exist. Create it first: npm run new-talk -- --name ${name}`);
 }
 
